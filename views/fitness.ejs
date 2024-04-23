@@ -13,14 +13,36 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    text-align: justify;
 }
+
+/* Responsive Styles */
+@media screen and (max-width: 500px) {
+    .card {
+        width: 100%;
+    }
+    header {
+        padding: 10px;
+    }
+    .profile h1 {
+        font-size: 1.5em;
+    }
+    .profile h2 {
+        font-size: 1em;
+    }
+    .nav ul li {
+        margin-right: 10px;
+    }
+}
+
+
 
 .fitness {
     position: relative;
     overflow: hidden;
     padding: 100px 0;
     text-align: center;
-    color: #fff;
+    color:rgb(0, 0, 0);
     font-size: 18px;
 }
 
@@ -32,11 +54,11 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 30px;
-    background-image: url('/images/fitness.jpg');
+    background-color: aliceblue;
     background-size: cover;
     background-position: center;
-    filter: blur(10px);
-    opacity: 0.7;
+    filter: blur(35px);
+    opacity: 1.7;
     z-index: -1;
 }
 
@@ -96,14 +118,28 @@ footer {
     color: #fff;
     text-align: center;
 }
+video {
+    width:50%;
+    height: fit;
+}
+
+.slide {
+    background-color:lightblue;
+    border-radius: 50px;
+}
+ .card {
+    background-color:aliceblue;
+    color: black;
+ }
 
 
     </style>
 </head>
 <body>
+    <%- include('partials/navbar') %>
     <div class="fitness">
     <!-- Reasons Section -->
-    <section>
+    <section class="slide">
         <h2>Reasons to Prioritize Fitness</h2>
         <ul>
           <li>Health Benefits: <br> Regular exercise contributes to better cardiovascular health, stronger muscles and bones, improved immune function, and overall longevity.</li>
@@ -123,27 +159,30 @@ footer {
     <section id="sales">
         <h2>Workout Plans</h2>
         <p>Explore our range of workout plans designed to help you achieve your fitness goals.</p>
-        <button><a href="/shop/fitness/programs">View Plans</a></button>
+        <button><a href="/shop">View Plans</a></button>
     </section>
 
     <!-- Home Workouts Section -->
-    <section id="home-workouts">
+    <section class="slide" id="home-workouts">
         <h2>Home Workouts (Bodyweight)</h2>
          <p>For most people, at-home solo workouts mean bodyweight-only exercises rather than studio classes and gym sessions that call for weights and other gear.</p>
           <p>Although this might appear limiting, bodyweight workouts can be highly effective. They challenge your form, offering opportunities for improvement without needing gear or ample space. Below are insights into top bodyweight exercises for a comprehensive strength training regimen at home.</p> 
-         <div id="prefers">
+         <div class="" id="prefers">
+           
             <h3>I Prefer </h3>
                  <h1>AIR SQUATS</h1>
                  <video autoplay="" loop="" playsinline="" muted="" class="mntl-gif__video universal-image__image" width="400" height="200" aria-label="squat" src="/videos/squat.mp4">
                 </video>
+                 <div class="card">
                 <h2>steps</h2>
             <p>Step 1 <br> <br> Begin by standing with your feet positioned shoulder-width apart. Initiate the mp4ement by lowering your hips downward and backward, mimicking the motion of sitting in a chair. Descend as far as you comfortably can while maintaining the natural arch of your lower back.</p>
             <p>Step 2 <br> <br> Next, push through your feet to rise back to a standing position. Focus on exerting force against the floor as you stand, ensuring your weight remains centered in your heels throughout the mp4ement.</p>
             <p>Continue performing the exercise in repetitions. Maintain an upright chest and engage your core muscles to keep your torso stable. You should feel a significant engagement in your lower body muscles and abdominal muscles during the exercise.</p>
-              
+              </div>
                <h1>PUSH-UPS</h1>
                <video autoplay="" loop="" playsinline="" muted="" class="mntl-gif__video universal-image__image" width="400" height="200" aria-label="squat" src="/videos/pushups.mp4">
             </video>
+            <div class="card">
                  <h2>steps</h2>
                  <p>Step 1 <br> <br> Begin by assuming a plank position with your shoulders directly above your wrists, forming a straight line from your shoulders to your heels, and engaging your core muscles.</p>
 
@@ -157,10 +196,11 @@ footer {
                  
                  <p>To increase the challenge, perform a regular push-up but slow down the lowering phase. Aim to take five or six counts before reaching the floor with your chest.</p>
                  
-
+            </div>
                  <h1>BURPESS</h1>
                  <video autoplay="" loop="" playsinline="" muted="" class="mntl-gif__video universal-image__image" width="400" height="200" aria-label="squat" src="/videos/burpee.mp4">
               </video>
+              <div class="card">
                    <h2>steps</h2>
                    <p>Step 1<br><br>Starting from a standing position, squat down and place your hands beneath your shoulders on the ground. Then, jump your feet back to assume a push-up position.</p>
 
@@ -176,6 +216,7 @@ footer {
                    
                    <h3>For more, check out our <a href="/shop/fitness/programs">Work out plans</a> here</h3>
         </div>
+    </div>
         <div id="advantages">
             <h3>Advantages</h3>
             <ul>
