@@ -5,7 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The M's Hub</title>
   <link rel="stylesheet" href="/styles/style.css">
-  
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "M's Hub",
+      "url": "https://themhub.co.ke",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+254797054212",
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/mark-mutugi-361362226/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3ByC4%2BKT4BS32yY3y5fwW5kA%3D%3D",
+        "https://www.facebook.com/omidamson.kerstenio/"
+      ]
+    }
+    </script>
 </head>
 <body>
   <header >
@@ -14,7 +29,13 @@
       <h1>Mark Mutugi M.</h1>
       <h2>Profile</h2>
       <p>I'm a freelance worker with a background in coding and electrical engineering, blending online and campus-based learning. <br>I'm passionate about continual learning, exploring new hobbies, and seeking personal growth opportunities.</p>
-    </section>      
+      <a href="https://www.linkedin.com/in/mark-mutugi-361362226/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3ByC4%2BKT4BS32yY3y5fwW5kA%3D%3D">LinkedIn</a>
+    </section>  
+    
+    <section class="ig-scan-code">
+      <img src="/images/scan2.jpg" alt="ig-scan-code" width="auto" height="200" >
+      <img src="/images/scan.jpg" alt="ig-scan-code" width="auto" height="200" >
+    </section>
   
 </header>
   <main>
@@ -41,20 +62,17 @@
     </section>
     
     
-    <section id="explore">
-        <h1><a href="/explore">Explore</a></h1>
-        <form class="search-form" action="/search" method="GET">
-          <input type="text" name="query" placeholder="Search...">
-          <button type="submit">Search</button>
-        </form>
+    <section " id="explore">
+        <h1>Explore</h1>
+        
         <div class="explore-content">
           <!-- Add Categories or Topics (Element 1) -->
           <div class="explore-categories">
             <h2>Categories</h2>
             <ul>
-              <li><a href="/category/technology">Technology</a></li>
-              <li><a href="/category/lifestyle">Lifestyle</a></li>
-              <li><a href="/category/travel">Travel</a></li>
+              <li><a href="https://www.youtube.com/@mark_Ke">Technology</a></li>
+              <li><a href="https://www.youtube.com/@mark_Ke">Lifestyle</a></li>
+              <li><a href="/travel">Travel</a></li>
               <!-- Add more categories as needed -->
             </ul>
           </div>
@@ -63,8 +81,8 @@
             <h2>Popular Tags</h2>
             <ul>
               <li><a href="/fitness">Fitness</a></li>
-              <li><a href="/cuisine">Cuisine</a></li>
-              <li><a href="/photography">Photography</a></li>
+              <li><a href="https://www.youtube.com/@mark_Ke">Cuisine</a></li>
+              <li><a href="https://www.youtube.com/@mark_Ke">Photography</a></li>
               <!-- Add more tags as needed -->
             </ul>
           </div>
@@ -82,27 +100,9 @@
               
             </ul>
           </div>
-          <!-- Add Interactive Elements (Element 9) -->
-          <div class="explore-interactions">
-            <h2>Interactive Elements</h2>
-            <p>Take our quiz on...</p>
-            <a href="/quiz" class="quiz-link">Quiz: Topic</a>
-          </div>
-        </div>
-      </section>
+         
       
   </main>
-  <script>
-    const videoPlayer = document.getElementById('videoPlayer');
-    const videoTitle = document.getElementById('videoTitle');
-    const videoDescription = document.getElementById('videoDescription');
-
-    // Update video information when the video is loaded and playing
-    videoPlayer.addEventListener('loadedmetadata', function() {
-      videoTitle.textContent = videoPlayer.currentSrc; // Example: Update title with video source
-      videoDescription.textContent = 'This is a sample video description.';
-    });
-  </script>
     <%- include('partials/footer') %>
 </body>
 </html>
