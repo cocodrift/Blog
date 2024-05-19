@@ -1,10 +1,10 @@
 {
-  "name": "e-app",
+  "name": "mshub-app",
   "version": "1.0.0",
-  "description": "Marks Market",
+  "description": "Marks Hub",
   "main": "app.js",
   "scripts": {
-    "test": "start"
+    "start": "node app.js"
   },
   "author": "mark mutugi",
   "license": "ISC",
