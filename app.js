@@ -1,6 +1,3 @@
-require('dotenv').config();
-console.log('MongoDB URI:', process.env.MONGODB_URI);  // Add this line to debug
-
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -10,14 +7,10 @@ const path = require('path');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect('mongodb+srv://vercel-admin-user:sivSaoPxiP2LzSKo@app1.vx2gtlp.mongodb.net/Blog', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
-}).then(() => {
-  console.log('Connected to MongoDB');
-}).catch(err => {
-  console.error('Error connecting to MongoDB:', err.message);
 });
 
 // Middleware
