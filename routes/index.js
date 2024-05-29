@@ -5,7 +5,7 @@ const Post = require('../models/post');
 // Index route
 router.get('/', async (req, res) => {
     const posts = await Post.find().sort({ createdAt: 'desc' });
-   res.render('idex', { posts });
+   res.render('index', { posts });
   });
 
   
