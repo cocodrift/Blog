@@ -2,9 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const path = require('path');
-
+    
 const app = express();
+  
+  // Set the views directory
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+  
+  // Parse incoming request bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://vercel-admin-user:sivSaoPxiP2LzSKo@app1.vx2gtlp.mongodb.net/Blog', {
@@ -18,8 +26,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set view engine
-app.set('view engine', 'ejs');
 
 // Routes
 const indexRoutes = require('./routes/index');
