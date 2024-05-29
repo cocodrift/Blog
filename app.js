@@ -22,13 +22,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 // Routes
-const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
 const adminRoutes = require('./routes/admin');
 
-app.use('/', indexRoutes);
 app.use('/posts', postRoutes);
-app.use('/admin', adminRoutes);
+app.use('/', adminRoutes);
 
 // Start the server
 const port = 3000;
