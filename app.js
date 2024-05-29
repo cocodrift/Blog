@@ -2,15 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const path = require('path');  // Add this line to import the path module
-
+const path = require('path');
 const app = express();
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
 
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Parse incoming request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
