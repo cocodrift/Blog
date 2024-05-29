@@ -2,14 +2,38 @@
 <html>
 <head>
   <title>Blog</title>
+  <style>
+    /* CSS styles for card layout */
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .card h2 {
+      margin-bottom: 5px;
+    }
+    .card p {
+      margin-bottom: 10px;
+    }
+    .view-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <h1>All Posts</h1>
   <ul>
     <% posts.forEach(post => { %>
-      <li>
+      <li class="card">
         <h2><a href="/posts/<%= post._id %>"><%= post.title %></a></h2>
         <p><%= post.content.split(" ").slice(0, 30).join(" ") %>...</p>
+        <button class="view-button">View Post</button>
       </li>
     <% }) %>
   </ul>

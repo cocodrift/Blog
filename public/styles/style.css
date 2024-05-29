@@ -1,301 +1,179 @@
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    margin: 0;
-    padding: 0;
-    background: #A9A9A9;
-    color: navy;
-}
-a{
-    color: white;
-    text-decoration: underline;
+
+
+/* Container Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Header Styles */
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+/* Grid Styles */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 
-/* Navigation Styles */
-.nav {
-    justify-content: space-between;
-    background-color: #A9A9A9;
-    padding: 10px 0;
-    color: #f0f0f0;
+/* Article Styles */
+.article {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
 }
 
-.nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.article:hover {
+  transform: translateY(-5px);
 }
 
-.nav ul li {
-    display: inline-block;
-    margin-right: 20px;
-    cursor: pointer;
+.article h2 {
+  font-size: 1.8em;
+  margin: 0 0 15px;
 }
 
-.nav ul li:last-child {
-    margin-right: 0;
+.article p {
+  color: #555;
+  margin-bottom: 15px;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 500px) {
-    .card {
-        width: 100%;
-    }
-    header {
-        padding: 10px;
-    }
-    .profile h1 {
-        font-size: 1.5em;
-    }
-    .profile h2 {
-        font-size: 1em;
-    }
-    .nav ul li {
-        margin-right: 10px;
-    }
+.article small {
+  color: #888;
+  text-align: right;
+  margin-top: auto;
 }
 
-/* Hero Section Styles */
-.hero {
-    position: relative;
-    overflow: hidden;
-    padding: 100px 0;
-    text-align: center;
-    color: #fff;
+/* Read More Link Styles */
+.read-more-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  align-self: flex-end;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    background-image: url('/images/hero.jpg'); /* Set your hero image here */
-    background-size: cover;
-    background-position: center;
-    filter: blur(5px); /* Adjust the blur amount as needed */
-    opacity: 0.7; /* Adjust the overlay opacity as needed */
-    z-index: 1;
+.read-more-link:hover {
+  text-decoration: underline;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
+/* Image Styles */
+.article img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
-.hero-title {
-    margin-bottom: 20px;
+/* Form Styles */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.hero-subtitle {
-    margin-bottom: 40px;
+form div {
+  margin-bottom: 15px;
 }
 
-.hero-subtitle h2 {
-    margin-bottom: 10px;
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #1da1f2;
 }
 
-.hero-subtitle p {
-    line-height: 1.6;
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none;
 }
 
-/* Card Styles */
-.card {
-    background-color: #f0f0f0;
-    display: inline-block;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    width: 40%;
-    position: relative; /* Added position relative for positioning the image */
+textarea {
+  height: 100px;
 }
 
-.profile h1 {
-    margin-bottom: 10px;
+button {
+  background-color: #1da1f2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.profile h2 {
-    font-size: 1.2em;
-    margin-bottom: 15px;
+button:hover {
+  background-color: #0d95e8;
 }
 
-.profile p {
-    margin-bottom: 0;
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.profile img {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 50px; /* Adjust the width of the image as needed */
-    border-radius: 30%; /* Makes the image circular */
+.about-container h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-/* Reasons Section Styles */
-#reasons ul {
-    list-style-type: disc;
-    margin-left: 2rem;
+.about-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
 }
 
-/* Sales Section Styles */
-#sales button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
+.about-container a {
+  color: #007bff;
+  text-decoration: none;
 }
 
-/* Testimonials Section Styles */
-.testimonial {
-    background-color: #f9f9f9;
-    padding: 1rem;
-    margin-bottom: 1rem;
+.about-container a:hover {
+  text-decoration: underline;
 }
 
-.testimonial p {
-    margin-bottom: 0.5rem;
+.contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-section {
-    padding: 2rem;
-    margin: 2rem 0;
+.contact-container h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-/* Explore section styles */
-#explore {
-    padding: 20px;
-    background-color: #f8f8f8;
-  }
-  
-  #explore h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-  }
-  
-  .search-form {
-    margin-bottom: 20px;
-  }
-  
-  .search-form input[type="text"] {
-    padding: 8px;
-    width: 200px;
-  }
-  
-  .search-form button {
-    padding: 8px 12px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .explore-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 20px;
-  }
-  
-  .explore-categories,
-  .explore-tags,
-  .explore-recent-posts,
-  .explore-authors,
-  .explore-interactions {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .explore-categories h2,
-  .explore-tags h2,
-  .explore-recent-posts h2,
-  .explore-authors h2,
-  .explore-interactions h2 {
-    margin-bottom: 10px;
-    font-size: 18px;
-  }
-  
-  .explore-categories ul,
-  .explore-tags ul,
-  .explore-recent-posts ul,
-  .explore-authors ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .explore-categories ul li,
-  .explore-tags ul li,
-  .explore-recent-posts ul li,
-  .explore-authors ul li {
-    margin-bottom: 10px;
-  }
-  
-  .explore-categories ul li a,
-  .explore-tags ul li a,
-  .explore-recent-posts ul li a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .explore-categories ul li a:hover,
-  .explore-tags ul li a:hover,
-  .explore-recent-posts ul li a:hover {
-    text-decoration: underline;
-  }
+.contact-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+}
 
-  .explore-authors{
-    gap: 2px;
-  }
-  
-  .explore-authors ul li {
-    display: flex;
-    align-items: center;
-  }
-  
-  .explore-authors img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .explore-authors .author-name {
-    font-weight: bold;
-  }
-  
-  .explore-authors .author-bio {
-    display: block;
-    font-size: 14px;
-    color: #666;
-  }
+.contact-container ul {
+  list-style: none;
+  padding: 0;
+}
 
-  
-  .quiz-link {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: #333;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  .quiz-link:hover {
-    background-color: #555;
-  }
-  
+.contact-container li {
+  margin-bottom: 10px;
+}
+
+.contact-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.contact-container a:hover {
+  text-decoration: underline;
+}
