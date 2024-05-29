@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= post.title %></title>
+</head>
+<body>
+  <h1><%= post.title %></h1>
+  <p><%= post.content %></p>
+  <h3>Comments:</h3>
+  <ul>
+    <% post.comments.forEach(comment => { %>
+      <li><%= comment.body %> - <%= comment.date.toLocaleDateString() %></li>
+    <% }) %>
+  </ul>
+  <form action="/posts/<%= post._id %>/comments" method="POST">
+    <textarea name="comment"></textarea>
+    <button type="submit">Add Comment</button>
+  </form>
+  <a href="/admin">Back to Admin</a>
+</body>
+</html>
