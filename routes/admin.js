@@ -8,10 +8,6 @@ router.get('/', async (req, res) => {
   res.render('admin', { posts });
 });
 
-// New post form
-router.get('/new', (req, res) => {
-  res.render('new');
-});
 
 // Create post
 router.post('/', async (req, res) => {

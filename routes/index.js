@@ -8,5 +8,8 @@ router.get('/', async (req, res) => {
    res.render('index', { posts });
   });
 
+  router.get('/new', (req, res) => {
+    res.render('new');
+  });
   
 module.exports = router;

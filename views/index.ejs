@@ -33,7 +33,7 @@
       <li class="card">
         <h2><a href="/posts/<%= post._id %>"><%= post.title %></a></h2>
         <p><%= post.content.split(" ").slice(0, 30).join(" ") %>...</p>
-        <button class="view-button">View Post</button>
+        <a href="/post"></a><button class="view-button">View Post</button>
       </li>
     <% }) %>
   </ul>
