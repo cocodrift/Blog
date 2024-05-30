@@ -81,7 +81,8 @@ app.post('/register', async (req, res) => {
 
     await user.save();
 
-    res.status(201).json({ msg: 'User registered successfully' });
+   // Redirect to login page after successful registration
+   res.status(201).redirect('/login');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
