@@ -54,6 +54,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/register', (req,res) => {
+  res.render('register')
+})
+
 app.get('/login', (req, res, next) => {
   try {
     res.render('login');
