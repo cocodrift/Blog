@@ -6,7 +6,6 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./middleware/passportConfig');
-const { errorHandler } = require('./middleware/common');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -21,10 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
 const mongoURI = 'mongodb+srv://vercel-admin-user:sivSaoPxiP2LzSKo@app1.vx2gtlp.mongodb.net/Blog';
+mongoose.set('strictQuery', false); // Set strictQuery to false to prepare for Mongoose 7
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
 })
 .then(() => console.log('MongoDB connected'))
 .catch((err) => console.log(err));
@@ -55,7 +54,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/login', (req, res) => {
+app.get('/login', (req, res, next) => {
   try {
     res.render('login');
   } catch (error) {
@@ -100,8 +99,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', { message: err.message });
 });
-
-router.use(errorHandler);
 
 // Start the server
 app.listen(port, () => {
