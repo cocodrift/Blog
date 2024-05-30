@@ -122,22 +122,6 @@ app.post('/register', async (req, res) => {
   }
 });
 
-app.get('/test-save-user', async (req, res) => {
-  try {
-    const sampleUser = new User({
-      username: 'testuser',
-      email: 'testuser@example.com',
-      password: 'hashedpassword' // Use a hashed password for testing
-    });
-
-    await sampleUser.save();
-    res.send('User saved successfully');
-  } catch (err) {
-    console.error('Error saving user:', err);
-    res.status(500).send('Error saving user');
-  }
-});
-
 
 app.get('/login', (req, res) => {
   res.render('login');
