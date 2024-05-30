@@ -65,6 +65,8 @@ app.post('/register', async (req, res) => {
   const { username, email, password, password2 } = req.body;
   let errors = [];
 
+  console.log('Received registration data:', req.body); // Log the incoming data
+
   if (!username || !email || !password || !password2) {
     errors.push({ msg: 'Please enter all fields' });
   }
@@ -78,6 +80,7 @@ app.post('/register', async (req, res) => {
   }
 
   if (errors.length > 0) {
+    console.log('Validation errors:', errors); // Log validation errors
     res.render('register', {
       errors,
       username,
@@ -91,6 +94,7 @@ app.post('/register', async (req, res) => {
 
       if (existingUser) {
         errors.push({ msg: 'Email already exists' });
+        console.log('Email already exists:', email); // Log if email exists
         res.render('register', {
           errors,
           username,
@@ -107,15 +111,33 @@ app.post('/register', async (req, res) => {
         });
 
         await newUser.save();
+        console.log('New user registered:', newUser); // Log the new user
         req.flash('success_msg', 'You are now registered and can log in');
         res.redirect('/login');
       }
     } catch (err) {
-      console.error(err);
+      console.error('Error during registration:', err); // Log any error during registration
       res.status(500).send('Server error');
     }
   }
 });
+
+app.get('/test-save-user', async (req, res) => {
+  try {
+    const sampleUser = new User({
+      username: 'testuser',
+      email: 'testuser@example.com',
+      password: 'hashedpassword' // Use a hashed password for testing
+    });
+
+    await sampleUser.save();
+    res.send('User saved successfully');
+  } catch (err) {
+    console.error('Error saving user:', err);
+    res.status(500).send('Error saving user');
+  }
+});
+
 
 app.get('/login', (req, res) => {
   res.render('login');
