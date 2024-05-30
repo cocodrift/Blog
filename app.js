@@ -60,35 +60,34 @@ app.get('/register', (req,res) => {
   res.render('register')
 })
 
-app.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
-
-  try {
-    // Check if the user already exists
-    let user = await User.findOne({ email });
-    if (user) {
-      return res.status(400).json({ msg: 'User already exists' });
+app.post('/register', (req, res, next) => {
+  const { username, password } = req.body;
+  
+  User.findOne({ username: username }, (err, existingUser) => {
+    if (err) return next(err);
+    if (existingUser) {
+      return res.redirect('/register');
     }
 
-    // Create a new user instance
-    user = new User({
-      username,
-      email,
-      password
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+      if (err) return next(err);
+      
+      const newUser = new User({
+        username: username,
+        password: hashedPassword
+      });
+      
+      newUser.save((err) => {
+        if (err) return next(err);
+        req.logIn(newUser, (err) => {
+          if (err) return next(err);
+          console.log('User registered:', newUser); // Log user details
+          console.log('Session:', req.session); // Log session details
+          return res.redirect('/');
+        });
+      });
     });
-
-    // Hash the password before saving
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
-
-    await user.save();
-
-   // Redirect to login page after successful registration
-   res.status(201).redirect('/login');
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
+  });
 });
 
 app.get('/login', (req, res, next) => {
