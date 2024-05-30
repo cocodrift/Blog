@@ -56,9 +56,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/register', (req,res) => {
-  res.render('register')
-})
+// Routes for registration and login
+app.get('/register', (req, res) => {
+  res.render('register', { errors: [] });
+});
 
 app.post('/register', async (req, res) => {
   const { email, password, password2 } = req.body;
@@ -68,7 +69,7 @@ app.post('/register', async (req, res) => {
     errors.push({ msg: 'Please enter all fields' });
   }
 
-  if (password != password2) {
+  if (password !== password2) {
     errors.push({ msg: 'Passwords do not match' });
   }
 
@@ -96,9 +97,10 @@ app.post('/register', async (req, res) => {
           password2
         });
       } else {
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({
           email,
-          password
+          password: hashedPassword
         });
 
         await newUser.save();
@@ -132,14 +134,13 @@ app.get('/logout', (req, res) => {
   });
 });
 
-
 // Routes
 const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
 const adminRoutes = require('./routes/admin');
 
 const isAuthenticated = require('./middleware/isAuthenticated');
-app.use('/', isAuthenticated, indexRoutes);
+app.use('/', indexRoutes);
 app.use('/posts', isAuthenticated, postRoutes);
 app.use('/admin', isAuthenticated, adminRoutes);
 
