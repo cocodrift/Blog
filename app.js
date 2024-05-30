@@ -60,65 +60,78 @@ app.get('/register', (req,res) => {
   res.render('register')
 })
 
-app.post('/register', (req, res, next) => {
-  const { username, password } = req.body;
-  
-  User.findOne({ username: username }, (err, existingUser) => {
-    if (err) return next(err);
-    if (existingUser) {
-      return res.redirect('/register');
-    }
+apppost('/register', async (req, res) => {
+  const { email, password, password2 } = req.body;
+  let errors = [];
 
-    bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) return next(err);
-      
-      const newUser = new User({
-        username: username,
-        password: hashedPassword
-      });
-      
-      newUser.save((err) => {
-        if (err) return next(err);
-        req.logIn(newUser, (err) => {
-          if (err) return next(err);
-          console.log('User registered:', newUser); // Log user details
-          console.log('Session:', req.session); // Log session details
-          return res.redirect('/');
-        });
-      });
+  if (!email || !password || !password2) {
+    errors.push({ msg: 'Please enter all fields' });
+  }
+
+  if (password != password2) {
+    errors.push({ msg: 'Passwords do not match' });
+  }
+
+  if (password.length < 6) {
+    errors.push({ msg: 'Password must be at least 6 characters' });
+  }
+
+  if (errors.length > 0) {
+    res.render('register', {
+      errors,
+      email,
+      password,
+      password2
     });
-  });
-});
+  } else {
+    try {
+      const existingUser = await User.findOne({ email: email });
 
-app.get('/login', (req, res, next) => {
-  try {
-    res.render('login');
-  } catch (error) {
-    next(error);
+      if (existingUser) {
+        errors.push({ msg: 'Email already exists' });
+        res.render('register', {
+          errors,
+          email,
+          password,
+          password2
+        });
+      } else {
+        const newUser = new User({
+          email,
+          password
+        });
+
+        await newUser.save();
+        req.flash('success_msg', 'You are now registered and can log in');
+        res.redirect('/login');
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Server error');
+    }
   }
 });
 
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
 app.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) return next(err);
-    if (!user) return res.redirect('/login');
-    req.logIn(user, (err) => {
-      if (err) return next(err);
-      console.log('User logged in:', user); // Log user details
-      console.log('Session:', req.session); // Log session details
-      return res.redirect('/');
-    });
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
   })(req, res, next);
 });
 
-app.get('/logout', (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err);
+app.get('/logout', (req, res) => {
+  req.logout(err => {
+    if (err) { return next(err); }
     req.flash('success_msg', 'You are logged out');
-    req.session.destroy();
-    res.redirect('/');
+    res.redirect('/login');
   });
 });
+
 
 // Routes
 const indexRoutes = require('./routes/index');
