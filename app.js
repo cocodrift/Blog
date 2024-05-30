@@ -6,7 +6,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./middleware/passportConfig');
-const { errorHandler } = require('../middleware/common');
+const { errorHandler } = require('./middleware/common');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -100,6 +100,8 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', { message: err.message });
 });
+
+router.use(errorHandler);
 
 // Start the server
 app.listen(port, () => {
