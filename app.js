@@ -60,7 +60,7 @@ app.get('/register', (req,res) => {
   res.render('register')
 })
 
-apppost('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
   const { email, password, password2 } = req.body;
   let errors = [];
 
