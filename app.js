@@ -107,7 +107,7 @@ app.post('/login', (req, res, next) => {
       if (err) return next(err);
       console.log('User logged in:', user); // Log user details
       console.log('Session:', req.session); // Log session details
-      return res.redirect('/admin');
+      return res.redirect('/');
     });
   })(req, res, next);
 });
