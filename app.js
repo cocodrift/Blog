@@ -6,7 +6,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./middleware/passportConfig');
-const { errorHandler} = require('../middleware/common');
+const { errorHandler } = require('../middleware/common');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -20,11 +20,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://vercel-admin-user:sivSaoPxiP2LzSKo@app1.vx2gtlp.mongodb.net/Blog', {
+const mongoURI = 'mongodb+srv://vercel-admin-user:sivSaoPxiP2LzSKo@app1.vx2gtlp.mongodb.net/Blog';
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false
-});
+  useFindAndModify: false,
+})
+.then(() => console.log('MongoDB connected'))
+.catch((err) => console.log(err));
+
 // Set up session with connect-mongo
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your_secret_key',
@@ -52,8 +56,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/login', (req, res) => {
-  try{
-    res.render ('login');
+  try {
+    res.render('login');
   } catch (error) {
     next(error);
   }
@@ -72,8 +76,8 @@ app.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-app.get('/logout', (req, res) => {
-  req.logout(err => {
+app.get('/logout', (req, res, next) => {
+  req.logout((err) => {
     if (err) return next(err);
     req.flash('success_msg', 'You are logged out');
     req.session.destroy();
@@ -86,27 +90,10 @@ const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
 const adminRoutes = require('./routes/admin');
 
-app.use('/',require('./middleware/isAuthenticated'), indexRoutes);
-app.use('/posts',require('./middleware/isAuthenticated'), postRoutes);
-app.use('/admin',require('./middleware/isAuthenticated'), adminRoutes);
-
-app.use(errorHandler);
-
-// Start the server
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
-
-
-
-
-
-
-
-
-// Import routes
-
+const isAuthenticated = require('./middleware/isAuthenticated');
+app.use('/', isAuthenticated, indexRoutes);
+app.use('/posts', isAuthenticated, postRoutes);
+app.use('/admin', isAuthenticated, adminRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -116,5 +103,5 @@ app.use((err, req, res, next) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
