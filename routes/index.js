@@ -11,5 +11,12 @@ router.get('/', async (req, res) => {
   router.get('/new', (req, res) => {
     res.render('new');
   });
-  
+
+  router.get('/terms', (req, res) => {
+    res.render('terms');
+  });
+
+  router.get('/policy', (req, res) => {
+    res.render('policy ');
+  });
 module.exports = router;
