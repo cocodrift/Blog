@@ -7,6 +7,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./middleware/passportConfig');
 const app = express();
+const User = require('./models/User')
 const port = process.env.PORT || 3000;
 
 // Set EJS as the view engine
