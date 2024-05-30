@@ -62,10 +62,10 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-  const { email, password, password2 } = req.body;
+  const { username, email, password, password2 } = req.body;
   let errors = [];
 
-  if (!email || !password || !password2) {
+  if (!username || !email || !password || !password2) {
     errors.push({ msg: 'Please enter all fields' });
   }
 
@@ -80,18 +80,20 @@ app.post('/register', async (req, res) => {
   if (errors.length > 0) {
     res.render('register', {
       errors,
+      username,
       email,
       password,
       password2
     });
   } else {
     try {
-      const existingUser = await User.findOne({ email: email });
+      const existingUser = await User.findOne({ email });
 
       if (existingUser) {
         errors.push({ msg: 'Email already exists' });
         res.render('register', {
           errors,
+          username,
           email,
           password,
           password2
@@ -99,6 +101,7 @@ app.post('/register', async (req, res) => {
       } else {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({
+          username,
           email,
           password: hashedPassword
         });
